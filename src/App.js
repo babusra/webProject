@@ -27,14 +27,17 @@ function App() {
   const [creditBalance, setCreditBalance] = useState(0);
   const [totalBalance, setTotalBalance] = useState(0);
 
-  var temp = parseInt(debtBalance) + parseInt(creditBalance);
-  var totalDebt = debtBalance;
+  // var temp = parseInt(debtBalance) + parseInt(creditBalance);
+  // var totalDebt = debtBalance;
   //const [debtArray, setDebtArray] = useState([debtBalance]);
 
+  var temp =  parseInt(debtBalance) - parseInt(creditBalance);
+  const [total,setTotal]= useState(temp)
+  console.log(temp)
 
-  useEffect(() => {
-    parseInt(totalBalance);
-  }, [rowCount]);
+useEffect(()=>{
+  setTotal(temp)
+},[temp])
 
   return (
     <>
@@ -59,6 +62,7 @@ function App() {
                 creditBalancee={creditBalance +` TL`}
                 setDebtBalance={setDebtBalance}
                 setCreditBalance={setCreditBalance}
+                total={temp}
               />
             ))}
           </Table>

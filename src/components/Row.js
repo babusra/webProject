@@ -58,10 +58,10 @@ function Row(props) {
           ></Input>
         </Td>
         <Td>
-          <Input value={props?.debtBalancee} size="md" disabled></Input>
+          <Input value={props?.total>0? props?.total:null} size="md" disabled></Input>
         </Td>
         <Td>
-          <Input value={props?.creditBalancee} size="md" disabled></Input>
+          <Input value={props?.total<0?(props?.total*(-1)):null} size="md" disabled></Input>
         </Td>
       </Tr>
     </Tbody>
