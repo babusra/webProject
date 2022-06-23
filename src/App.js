@@ -1,24 +1,79 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import {
+  ChakraProvider,
+  Box,
+  Table,
+  TableCaption,
+  Thead,
+  Tr,
+  Th,
+  Tbody,
+  Td,
+  Input,
+  Button,
+} from "@chakra-ui/react";
+import Row from "./components/Row";
+import Custom from "./components/Custom";
 
 function App() {
+  // const [debtBalance, setDebtBalance] = useState();
+  // const [creditBalance, setCreditBalance] = useState(0);
+  const [rowCount, setRowCount] = useState(1);
+
+  // useEffect(() => {console.log(debtBalance,creditBalance)}, [debtBalance,creditBalance]);
+  // const [inputBalance,setInputBalance] = useState(debtBalance+creditBalance)
+
+  const [debtBalance, setDebtBalance] = useState(0);
+  const [creditBalance, setCreditBalance] = useState(0);
+  const [totalBalance, setTotalBalance] = useState(0);
+
+  var temp = parseInt(debtBalance) + parseInt(creditBalance);
+  var totalDebt = debtBalance;
+  //const [debtArray, setDebtArray] = useState([debtBalance]);
+
+
+  useEffect(() => {
+    parseInt(totalBalance);
+  }, [rowCount]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ChakraProvider>
+        <Custom/>
+        <Box p={4}>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Tarih</Th>
+                <Th>Açıklama</Th>
+                <Th>Borç</Th>
+                <Th>Alacak</Th>
+                <Th>Borç Bakiye</Th>
+                <Th>Alacak Bakiye</Th>
+              </Tr>
+            </Thead>
+            {[...Array(rowCount)].map((e, i) => (
+              <Row
+                //={onChange}
+                debtBalancee={debtBalance +` TL`}
+                creditBalancee={creditBalance +` TL`}
+                setDebtBalance={setDebtBalance}
+                setCreditBalance={setCreditBalance}
+              />
+            ))}
+          </Table>
+          <Button
+            onClick={() => {
+              setRowCount(rowCount + 1);
+              console.log(rowCount);
+            }}
+          >
+            {" "}
+            + Yeni İşlem{" "}
+          </Button>
+        </Box>
+      </ChakraProvider>
+    </>
   );
 }
 
